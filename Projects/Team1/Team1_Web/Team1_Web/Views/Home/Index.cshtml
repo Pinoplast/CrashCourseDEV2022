@@ -1,0 +1,120 @@
+﻿@model HomeModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+        @foreach (var item in Model.PigletsList)
+        {
+        <div class="col-md-4">
+            <div class="card flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="/images/piggy.jpg" class="card-img-top" alt="piggy">
+                         <div class="card-body" id="piggy_@item.Id">
+                                    
+                            <h5 class="card-title">@item.Name</h5>
+                         </div>
+                         <div class="unit-card piggy clearfix">
+                                <div class="one-third">
+                                    <div class="stat">@item.Speed</div>
+                                    <div class="stat-value">Speed</div>
+                                </div>
+
+                                <div class="one-third">
+                                    <div class="stat">@item.Power</div>
+                                    <div class="stat-value">Power</div>
+                                </div>
+
+                                <div class="one-third no-border">
+                                    <div class="stat">@item.Smart</div>
+                                    <div class="stat-value">Smart</div>
+                                </div>
+                         </div>
+                    </div>
+                        <div class="flip-card-back" id="house_@item.Id">
+                        @if (@item.MyHouse.Name.Contains("Ніф-Ніф"))
+                        {
+                            <img src="/images/house_nif-nif.jpg" class="card-img-top" alt="house">
+                        }
+                        else if (@item.MyHouse.Name.Contains("Наф-Наф"))
+                        {
+                             <img src="/images/house_naf-naf.jpg" class="card-img-top" alt="house">
+                        }
+                        else if (@item.MyHouse.Name.Contains("Нуф-Нуф"))
+                        {
+                            <img src="/images/house_nuf-nuf.jpg" class="card-img-top" alt="house">
+                        }
+                         <div class="card-body">
+                            <h5 class="card-title">@item.MyHouse.Name</h5>
+                        </div>
+                        <div class="unit-card piggy clearfix">
+                            <div class="one-first no-border">
+                                 <div class="stat">@item.MyHouse.BuildingSolidity</div>
+                                 <div class="stat-value">Solidity</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>    
+            </div>
+                    <div class="card-footer bg-transparent px-0">
+                        <button id="action_vs" data-request-url="@Url.Action("WolfAtackPiggy", "Home", new { id = @item.Id })"
+                            type="button" class="btn btn-lg btn-outline-danger mt-4 p-0" style="width: 18rem">
+                           Attack
+                       </button>
+                    </div>
+        </div>        
+        }            
+        </div>
+    </div>
+    <div class="col-md-1 d-flex align-items-center justify-content-center">        
+        <img src="/images/vs.png" class="mx-auto d-block w-100"  alt="piggy">        
+    </div>
+    <div class="col-md-3">
+        <div class="row justify-content-end">
+            <div class="col-md-12">
+                <div class="card flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="/images/wolf.jpg" class="card-img-top" alt="wolf">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.HeroWolf.Name</h5>
+                            </div>
+                            <div class="unit-card wolf clearfix">
+                                <div class="one-second">
+                                    <div class="stat">@Model.HeroWolf.strenght</div>
+                                    <div class="stat-value">Strenght</div>
+                                </div>
+
+                                <div class="one-second">
+                                    <div class="stat">@Model.HeroWolf.speed</div>
+                                    <div class="stat-value">Speed</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="/images/wolf.jpg" class="card-img-top" alt="wolf">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.HeroWolf.Name</h5>
+                            </div>
+                            <div class="unit-card wolf clearfix">
+                                <div class="one-second">
+                                    <div class="stat">@Model.HeroWolf.strenght</div>
+                                    <div class="stat-value">Strenght</div>
+                                </div>
+
+                                <div class="one-second">
+                                    <div class="stat">@Model.HeroWolf.speed</div>
+                                    <div class="stat-value">Speed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
