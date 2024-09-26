@@ -1,0 +1,18 @@
+﻿@model HomeModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Message</h1>
+    <ul>
+        @foreach(var item in Model.ListOfDrinks){
+            @if(item != "Coffee")
+            {
+                <li>@item</li>
+            }
+        }
+    </ul>
+
+    <h3>But my favorite drink is @Model.ListOfDrinks[@Model.MyFavoriteDrink - 1]</h3>
+</div>

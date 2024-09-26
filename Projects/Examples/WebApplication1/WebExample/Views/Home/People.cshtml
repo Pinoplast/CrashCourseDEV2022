@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "People page";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="people-wrapper">
+	<table class="people-data">
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Role</th>
+			<th>Created</th>
+			<th>Actions</th>
+		</tr>
+	</table>
+</div>
+
+<script type="text/javascript">
+	
+	function getPeople(){
+		$(".lds-dual-ring").css("display", "block");
+		$.ajax({
+			url: "https://localhost:7081/People",
+			success: (data) => {
+				let peopleDataElement = document.querySelector(".people-data");
+				
+				for (var i in data) {
+					let personDataElement = document.createElement("tr", );
+					let idElement = document.createElement("td");
+					idElement.textContent = data[i].id;
+					let nameElement = document.createElement("td");
+					nameElement.textContent = data[i].name;
+					let ageElement = document.createElement("td");
+					ageElement.textContent = data[i].age;
+					let roleElement = document.createElement("td");
+					roleElement.textContent = getRole(data[i].role);
+					let createdElement = document.createElement("td");
+					let actionsElement = document.createElement("td");
+					createdElement.textContent = new Date(data[i].created).toISOString();
+					let removeBtnElement = document.createElement("button");
+					removeBtnElement.textContent = "Remove";
+					removeBtnElement.className = "personN" + data[i].id;
+					removeBtnElement.setAttribute('onclick', 'removeUser(' + data[i].id+')');
+					actionsElement.appendChild(removeBtnElement);
+
+					personDataElement.appendChild(idElement);
+					personDataElement.appendChild(nameElement);
+					personDataElement.appendChild(ageElement);
+					personDataElement.appendChild(roleElement);
+					personDataElement.appendChild(createdElement);
+					personDataElement.appendChild(actionsElement);
+					peopleDataElement.appendChild(personDataElement);
+				}
+
+				$(".lds-dual-ring").css("display", "none");
+				console.log(data);
+			}
+		});
+	}
+
+	function removeUser(id)
+	{
+		$(".lds-dual-ring").css("display", "block");
+		$.ajax({
+			url: "https://localhost:7081/People?id=" + id,
+			method: "DELETE",
+			success: (data) => {
+				window.location.reload();
+			}
+		});
+	}
+
+	function getRole(role){
+		switch(Number.parseInt(role)){
+			case 0: return "Administrator";
+			case 1: return "Moderator";
+			case 2: return "User";
+		}
+	}
+	
+	window.onload = getPeople;
+	
+</script>
+<style>
+	.people-data {
+		font-family: Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+		.people-data td, .people-data th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		.people-data tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		.people-data tr:hover {
+			background-color: #ddd;
+		}
+
+		.people-data th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: left;
+			background-color: #04AA6D;
+			color: white;
+		}
+</style>
