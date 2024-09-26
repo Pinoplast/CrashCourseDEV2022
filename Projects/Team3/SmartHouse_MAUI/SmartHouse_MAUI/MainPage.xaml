@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartHouse_MAUI.MainPage"
+             Title="Smart Home"
+             BackgroundImageSource="fon.jpg">
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="55"></RowDefinition>
+                <RowDefinition Height="55"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <!--<RowDefinition Height="50"></RowDefinition>-->
+
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+            <!--<BoxView Color="CadetBlue" Grid.Column="2" Grid.RowSpan="4"></BoxView>-->
+
+            <Label
+                Grid.Row="0" Grid.Column="0"
+                Text="{Binding AirConditionerMode, StringFormat='Air  Condition : {0}'}"    
+                HorizontalOptions="Fill" 
+                BackgroundColor="{StaticResource Key=Blue100Accent}"
+                TextColor="White"
+               />
+            <!--<Label
+                Grid.Row="0" Grid.Column="0"
+                Text="Air Conditioner"
+                FontSize="24"
+                HorizontalOptions="Fill" 
+                BackgroundColor="{StaticResource Key=Blue100Accent}"
+                TextColor="White"
+               />-->
+
+            <!--<Border StrokeThickness="4" BackgroundColor="Gray"   Grid.Row="0" Grid.Column="2">-->
+            <Label
+                x:Name="LblLamp" 
+                Text="Lamp"
+                FontSize="24"
+                HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="2"
+                BackgroundColor="{StaticResource Key=Gray500}"
+                TextColor="White"
+                />
+
+            <Frame Grid.Row="1">
+                <ScrollView  Grid.Row="1" HeightRequest="350">
+                    <Label Text="{Binding Info}"></Label>
+                </ScrollView>
+            </Frame>
+
+            <Frame Grid.Row="2">
+                <Label Text="{Binding Temperature, StringFormat='House temperature : {0} C'} "  FontSize="14"></Label>
+            </Frame>
+            <!--<Slider Value="{Binding Temperature}" Maximum= "50" Minimum="-50" Grid.Row = "3" Grid.Column="0"></Slider>-->
+            <Frame  Grid.Row = "3" Grid.Column="0">
+                <Label Text="{Binding OuterTemperature, StringFormat ='Outer temperature : {0} C'}"  FontSize="14"></Label>
+            </Frame>
+            
+             <Frame Grid.Row="1" Grid.Column="2">
+                <ScrollView  Grid.Row="1" HeightRequest="350">
+                    <Label Text="{Binding InfoWorkingLamp}"></Label>
+                </ScrollView>
+            </Frame>
+
+            <Frame Grid.Row="2" Grid.Column="2">
+                <Label Text="{Binding Lux, StringFormat='House lux: {0}.'} "  FontSize="14"></Label>
+            </Frame>
+            <!--<Slider Value="{Binding Temperature}" Maximum= "50" Minimum="-50" Grid.Row = "3" Grid.Column="0"></Slider>-->
+            <Frame  Grid.Row = "3" Grid.Column="2">
+                <Label Text="{Binding IsMoving, StringFormat ='Someone walks in the house: {0}'}"  FontSize="14"></Label>
+            </Frame>
+            <!--<Label Text="{Binding TestInfo}" TextColor="Red" Grid.Row = "5" Grid.Column="0">
+            </Label>-->
+
+            <Button
+                Grid.Row="4" Grid.Column="0"
+                x:Name="BtnRun"
+                Text="Start"
+                SemanticProperties.Hint="Run House"
+                HorizontalOptions="Fill" 
+                Command="{Binding Run}"
+                />
+            <Button
+                Grid.Row="4" Grid.Column="2"
+                x:Name="BtnMonitor"
+                Text="Monitoring"
+                SemanticProperties.Hint="Next Step"
+                HorizontalOptions="Fill" 
+                Command="{Binding MonitorIndicators}"
+                Clicked="BtnMonitor_Clicked"
+                />
+
+        </Grid>
+
+
+    </ScrollView>
+
+</ContentPage>
